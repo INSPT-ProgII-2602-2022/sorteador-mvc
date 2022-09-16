@@ -17,22 +17,19 @@ import java.util.logging.Logger;
 public class Modelo {
 
     private VisorDeTXTs visor;
-    private List<String> laLista;
-    private Random randomGenerator;
+    private Sorteador<String> sorteador;
     
     public Modelo() {
         visor = new VisorDeTXTs();
-        laLista = new ArrayList<>();
-        randomGenerator = new Random();
+        sorteador = new Sorteador<>();
     }
     
     public void cargarDatos(String ruta) throws IOException {
-        laLista = visor.getLineasDeTxt(ruta);
+        sorteador.add(visor.getLineasDeTxt(ruta));
     }
     
     public String getProximoSorteado() {
-        int rnd = randomGenerator.nextInt(laLista.size());
-        return laLista.remove(rnd);        
+        return sorteador.remove();
     }
     
 }
